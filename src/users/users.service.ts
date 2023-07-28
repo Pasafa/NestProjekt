@@ -18,7 +18,7 @@ export class UsersService {
   }
 
   find(email: string) {
-    return this.repo.find({email}); //returns an array of all the matches if there is no                             
+    return this.repo.find({where: {email}}); //returns an array of all the matches if there is no                             
   }                                 //we reveive an empty array
 
   async update(id: number, attrs: Partial<User>) { //asyncbronus operation thats why await
