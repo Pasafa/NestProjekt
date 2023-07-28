@@ -33,5 +33,12 @@ export class UsersService {
   } //<User> reference to entity. Patial means that the object passed inside attrs
     //has no, one, or all the propertie of the user defined in the entity User
 
-  remove() {}
+  async remove(id: number) {
+    const user = await this.findOne(id);
+    if (!user) {
+      throw new Error('User not found')
+    }
+    return this.repo.remove(user)
+
+  }
 }
