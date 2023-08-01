@@ -13,7 +13,7 @@ export class UsersService {
     return this.repo.save(user);
   }
 
-  findOne(id: number) {
+  findOneBy(id: number) {
     return this.repo.findOne({id}); //returns one or null
   }
 
@@ -22,7 +22,7 @@ export class UsersService {
   }                                 //we reveive an empty array
 
   async update(id: number, attrs: Partial<User>) { //asyncbronus operation thats why await
-    const user = await this.findOne(id); 
+    const user = await this.findOneBy(id); 
     if (!user) {
       throw new Error('user not found');
     }
@@ -30,11 +30,11 @@ export class UsersService {
     return this.repo.save(user); //user saved to repository
 
 
-  } //<User> reference to entity. Patial means that the object passed inside attrs
+  } //<User> reference to entity. Partial means that the object passed inside attrs
     //has no, one, or all the propertie of the user defined in the entity User
 
   async remove(id: number) {
-    const user = await this.findOne(id);
+    const user = await this.findOneBy(id);
     if (!user) {
       throw new Error('User not found')
     }

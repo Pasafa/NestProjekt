@@ -14,7 +14,7 @@ export class UsersController {
 
   @Get('/:id') //it alsways loks at the string string needs to be parsed as a number
   findUser(@Param('id') id: string) { //paerse handles this
-    return this.usersService.findOne(parseInt(id));
+    return this.usersService.findOneBy(parseInt(id));
 
   }
 
@@ -28,8 +28,8 @@ export class UsersController {
     return this.usersService.remove(parseInt(id));
   }
 
-  @Patch('/id') 
-  UpdateUser(id: string, @Body() body: UpdateUserDto) {
+  @Patch('/:id') 
+  updateUser(@Param('id') id: string, @Body() body: UpdateUserDto) {
     return this.usersService.update(parseInt(id), body);
   }
 
