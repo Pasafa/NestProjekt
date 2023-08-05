@@ -14,6 +14,7 @@ import {
 import { CreateUserDto } from './dtos/create-user.dto';
 import { UsersService } from './users.service';
 import { UpdateUserDto } from './dtos/update-user.dto';
+import { SerializeInterceptor } from 'src/interceptors/serialize.interceptor';
 
 @Controller('auth')
 export class UsersController {
@@ -23,9 +24,10 @@ export class UsersController {
   createUser(@Body() body: CreateUserDto) {
     this.usersService.create(body.email, body.password);
   }
-  @UseInterceptors(ClassSerializerInterceptor)
+  @UseInterceptors(SerializeInterceptor)
   @Get('/:id') //it alsways loks at the string string needs to be parsed as a number
   async findUser(@Param('id') id: string) {
+    console.log('handler is running')
     //paerse handles this
     const user = await this.usersService.findOneBy(parseInt(id));
     if (!user) {
